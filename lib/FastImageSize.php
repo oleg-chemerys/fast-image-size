@@ -200,7 +200,15 @@ class FastImageSize
 	{
 		if (empty($this->data))
 		{
-			$this->data = @file_get_contents($filename, null, null, $offset, $length);
+      // Omitting ssl verification options
+			$context_options = array(
+        'ssl' => array(
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+        ),
+      );
+
+      $this->data = file_get_contents($filename, false, stream_context_create($context_options), $offset, $length);
 		}
 
 		// Force length to expected one. Return false if data length
