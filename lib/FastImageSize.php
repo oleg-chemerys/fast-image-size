@@ -208,7 +208,7 @@ class FastImageSize
         ),
       );
 
-      $this->data = file_get_contents($filename, false, stream_context_create($context_options), $offset, $length);
+      $this->data = @file_get_contents($filename, false, stream_context_create($context_options), $offset, $length);
 		}
 
 		// Force length to expected one. Return false if data length
